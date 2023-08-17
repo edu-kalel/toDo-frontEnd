@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 
 const NewTask = () => {
@@ -39,48 +40,51 @@ const NewTask = () => {
 
   return (
     <>
-      <div>
-        <label htmlFor="text">Text</label>
-        <input
-          type="text"
-          id="text"
-          value={text}
-          onChange={(event) => {
-            setText(event.target.value);
-          }}
-        />
-      </div>
-      <div>
-        <label htmlFor="dueDate">Due date</label>
-        <input
-          type="datetime-local"
-          id="dueDate"
-          value={dueDate}
-          onChange={(event) => {
-            setDueDate(event.target.value);
-          }}
-        />
-      </div>
-      <div>
-        <label htmlFor="priority">Priority</label>
-        <input
-          type="number"
-          id="priority"
-          value={priority}
-          onChange={(event) => {
-            setPriority(event.target.value);
-          }}
-        />
-      </div>
-      <div>
-        <button
-          id="submit"
-          type="button"
-          onClick={() => sendCreateTaskRequest()}
-        >
-          Add New Task
-        </button>
-      </div>
+      <Form>
+        <Form.Group>
+          <Form.Label htmlFor="text">Text</Form.Label>
+          <Form.Control
+            // size="sm"
+            type="text"
+            id="text"
+            value={text}
+            onChange={(event) => {
+              setText(event.target.value);
+            }}
+          />
+        </Form.Group>
+        <Form>
+          <Form.Label htmlFor="dueDate">Due date</Form.Label>
+          <Form.Control
+            type="datetime-local"
+            id="dueDate"
+            value={dueDate}
+            onChange={(event) => {
+              setDueDate(event.target.value);
+            }}
+          />
+        </Form>
+        <Form.Group>
+          <Form.Label htmlFor="priority">Priority</Form.Label>
+          <Form.Control
+            type="number"
+            id="priority"
+            value={priority}
+            onChange={(event) => {
+              setPriority(event.target.value);
+            }}
+          />
+        </Form.Group>
+        <div>
+          <Button
+            id="submit"
+            type="button"
+            onClick={() => sendCreateTaskRequest()}
+          >
+            Add New Task
+          </Button>
+        </div>
+      </Form>
     </>
   );
 };

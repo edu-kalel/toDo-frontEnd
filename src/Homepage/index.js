@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Homepage = () => {
@@ -22,27 +23,61 @@ const Homepage = () => {
   function createNewTask() {
     window.location.href = "newTask";
   }
+  function modifyScreen(taskId) {
+    // <Navigate to={`/task/update/${taskId}`} />;
+    window.location.href = `/task/update/${taskId}`;
+  }
   return (
     <>
-      <div>
-        <h1>AYUDA</h1>
-      </div>
-      <div>
-        {" "}
-        {tasks ? (
-          tasks.map((task) => (
-            <div>
-              {" "}
-              <Link to={`/todos/${task.id}`}> Task ID : {task.id}</Link>
-            </div>
-          ))
-        ) : (
-          <></>
-        )}
-      </div>
-      <div>
-        <button onClick={() => createNewTask()}>Create New Task</button>
-      </div>
+      <Container>
+        <div>
+          <h1>DASHBOARD</h1>
+        </div>
+        <div>
+          <Button onClick={() => createNewTask()}>Create New Task</Button>
+        </div>
+        <Row>
+          <Col>Is it done?</Col>
+          <Col>ID</Col>
+          <Col xs={5}>Text</Col>
+          <Col>Due Date</Col>
+          <Col>Priority</Col>
+          <Col>Options</Col>
+        </Row>
+        <Row>
+          {" "}
+          {tasks ? (
+            tasks.map((task) => (
+              <div>
+                {" "}
+                <Row>
+                  <Col>{task.done}</Col>
+                  <Col>
+                    <Link to={`/task/${task.id}`}>{task.id}</Link>
+                  </Col>
+                  <Col xs={5}>{task.text}</Col>
+                  <Col>{task.dueDate}</Col>
+                  <Col>{task.priority}</Col>
+                  <Col>
+                    {/* Edit */}
+                    <div>
+                      <Button
+                        id="submit"
+                        type="button"
+                        onClick={() => modifyScreen(task.id)}
+                      >
+                        Edit
+                      </Button>
+                    </div>
+                  </Col>
+                </Row>
+              </div>
+            ))
+          ) : (
+            <></>
+          )}
+        </Row>
+      </Container>
     </>
   );
 };
