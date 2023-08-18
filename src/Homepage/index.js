@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import NewTask from "../NewTask";
 
 const Homepage = () => {
   const [tasks, setTasks] = useState(null);
@@ -27,6 +28,7 @@ const Homepage = () => {
     // <Navigate to={`/task/update/${taskId}`} />;
     window.location.href = `/task/update/${taskId}`;
   }
+  function updateDone(id, value) {}
   return (
     <>
       <Container>
@@ -51,7 +53,16 @@ const Homepage = () => {
               <div>
                 {" "}
                 <Row>
-                  <Col>{task.done}</Col>
+                  <Col>
+                    <Form.Check
+                      aria-label="option 1"
+                      value={task.done}
+                      // onChange={(e) => {
+                      //     updateDone(task.id, e.target.value)
+                      // }}
+                    />
+                    {task.done ? "true" : "false"}
+                  </Col>
                   <Col>
                     <Link to={`/task/${task.id}`}>{task.id}</Link>
                   </Col>
